@@ -1,12 +1,9 @@
-import { enableProdMode } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+declare const Zone: any;
 
-import { AppModule } from './app/app.module';
-import { environment } from './environments/environment';
+const myFirstZone = Zone.current.fork({
+  name: 'my first zone',
+});
 
-if (environment.production) {
-  enableProdMode();
-}
+console.log(myFirstZone.name); // my first
 
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
+console.log(myFirstZone.parent === Zone.current); // true
